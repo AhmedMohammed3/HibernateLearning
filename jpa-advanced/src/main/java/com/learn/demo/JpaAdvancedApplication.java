@@ -22,7 +22,7 @@ public class JpaAdvancedApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        courseRepository.playWithEntityManager();
+//        courseRepository.playWithEntityManager();
 //        Course course = courseRepository.findById(10001L);
 //        log.info("Course with id 10001: {}", course);
 //        log.info("==============================================");
