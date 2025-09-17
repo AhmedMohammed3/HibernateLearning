@@ -1,19 +1,16 @@
 package com.learn.demo.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
-
 public class Student {
     @Id
     @GeneratedValue
@@ -22,11 +19,19 @@ public class Student {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     Passport passport;
 
 
     public Student(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

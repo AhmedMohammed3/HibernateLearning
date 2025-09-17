@@ -33,6 +33,7 @@ public class StudentRepository {
 
     public void saveStudentWihPassport() {
         Passport passport = new Passport("Z123456");
+        em.persist(passport);
         Student student = new Student("Mike");
         student.setPassport(passport);
         em.persist(student);
