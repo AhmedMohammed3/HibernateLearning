@@ -1,5 +1,6 @@
 package com.learn.demo.repository;
 
+import com.learn.demo.entity.Course;
 import com.learn.demo.entity.Passport;
 import com.learn.demo.entity.Student;
 import jakarta.persistence.EntityManager;
@@ -36,6 +37,30 @@ public class StudentRepository {
         em.persist(passport);
         Student student = new Student("Mike");
         student.setPassport(passport);
+        em.persist(student);
+    }
+
+    public void insertHardcodedStudentAndCourse() {
+        Student student = new Student("Jack");
+        Course course = new Course("Microservices in 100 Steps");
+
+        em.persist(course);
+        em.persist(student);
+
+        student.addCourse(course);
+        course.addStudent(student);
+
+        em.persist(student);
+    }
+
+    public void insertStudentAndCourse(Student student, Course course) {
+
+        em.persist(course);
+        em.persist(student);
+
+        student.addCourse(course);
+        course.addStudent(student);
+
         em.persist(student);
     }
 }
