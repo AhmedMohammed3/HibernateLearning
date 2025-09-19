@@ -30,20 +30,6 @@ public class JpaAdvancedApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        List<Review> reviews = List.of(
-//                new Review("5", "Great Course - inserted 1"),
-//                new Review("4", "Good Course - inserted 2")
-//        );
-//        courseRepository.addReviewsForCourse(10003L, reviews);
-//        Student student = new Student("Jack");
-//        Course course = new Course("Microservices in 100 Steps");
-//
-//        studentRepository.insertStudentAndCourse(student, course);
 
-        employeeRepository.save(new PartTimeEmployee("Jack", new BigDecimal(50)));
-        employeeRepository.save(new FullTimeEmployee("Jill", new BigDecimal(10000)));
-
-        log.info("All Part Time Employees {}", employeeRepository.findAllPartTimeEmployees());
-        log.info("All Full Time Employees {}", employeeRepository.findAllFullTimeEmployees());
     }
 }
