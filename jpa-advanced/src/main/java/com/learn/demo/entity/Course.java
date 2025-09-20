@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -22,7 +23,8 @@ import java.util.List;
         @NamedQuery(name = "query_get_all_courses", query = "select c from Course c"),
         @NamedQuery(name = "query_get_all_courses_by_name_like", query = "Select c From Course c where name like :name")
 })
-
+@Cacheable
+@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Course {
     @Id
     @GeneratedValue
