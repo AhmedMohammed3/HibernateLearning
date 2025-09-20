@@ -6,8 +6,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.time.LocalDateTime;
@@ -23,8 +25,9 @@ import java.util.List;
         @NamedQuery(name = "query_get_all_courses", query = "select c from Course c"),
         @NamedQuery(name = "query_get_all_courses_by_name_like", query = "Select c From Course c where name like :name")
 })
-@Cacheable
-@org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
+@SQLDelete(sql = "Update course set is_deleted = true where id = ?")
+@SQLRestriction("is_deleted = false")
+@Slf4j
 public class Course {
     @Id
     @GeneratedValue
@@ -47,6 +50,9 @@ public class Course {
     @UpdateTimestamp
     @Column(name = "last_updated_date", nullable = false)
     private LocalDateTime lastUpdatedDate;
+
+
+    private boolean isDeleted;
 
     public Course(String name) {
         this.name = name;
@@ -71,5 +77,11 @@ public class Course {
     @Override
     public String toString() {
         return "Course{" + "id=" + id + ", name='" + name + '\'' + ", createdDate=" + createdDate + ", lastUpdatedDate=" + lastUpdatedDate + '}';
+    }
+
+    @PreRemove
+    private void preRemove() {
+        log.info("PreRemove method called");
+        this.isDeleted = true;
     }
 }
