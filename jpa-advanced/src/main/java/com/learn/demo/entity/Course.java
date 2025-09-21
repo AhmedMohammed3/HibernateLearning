@@ -23,6 +23,7 @@ import java.util.List;
 @Setter
 @NamedQueries({
         @NamedQuery(name = "query_get_all_courses", query = "select c from Course c"),
+        @NamedQuery(name = "query_get_all_courses_join_fetch", query = "select c from Course c JOIN FETCH c.students s"),
         @NamedQuery(name = "query_get_all_courses_by_name_like", query = "Select c From Course c where name like :name")
 })
 @SQLDelete(sql = "Update course set is_deleted = true where id = ?")
