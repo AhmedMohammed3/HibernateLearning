@@ -22,6 +22,9 @@ public class Student {
     @Column(nullable = false)
     private String name;
 
+    @Embedded
+    private Address address;
+
     @OneToOne(fetch = FetchType.LAZY)
     Passport passport;
 

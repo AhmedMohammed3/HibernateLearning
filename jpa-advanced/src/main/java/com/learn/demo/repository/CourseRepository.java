@@ -2,6 +2,7 @@ package com.learn.demo.repository;
 
 import com.learn.demo.entity.Course;
 import com.learn.demo.entity.Review;
+import com.learn.demo.entity.ReviewRating;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -48,8 +49,8 @@ public class CourseRepository {
         Course course = findById(10003L);
         log.info("Course.getReviews() {}", course.getReviews());
 //
-        Review review1 = new Review("5", "Great Course - inserted 1");
-        Review review2 = new Review("4", "Good Course - inserted 2");
+        Review review1 = new Review(ReviewRating.FIVE, "Great Course - inserted 1");
+        Review review2 = new Review(ReviewRating.FOUR, "Good Course - inserted 2");
 //
         course.addReview(review1);
         review1.setCourse(course);

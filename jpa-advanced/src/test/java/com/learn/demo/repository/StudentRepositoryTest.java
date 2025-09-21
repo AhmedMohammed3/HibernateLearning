@@ -1,6 +1,7 @@
 package com.learn.demo.repository;
 
 import com.learn.demo.JpaAdvancedApplication;
+import com.learn.demo.entity.Address;
 import com.learn.demo.entity.Passport;
 import com.learn.demo.entity.Student;
 import jakarta.persistence.EntityManager;
@@ -48,5 +49,14 @@ class StudentRepositoryTest {
         log.info("Student {}", student);
         log.info("Student Courses {}", student.getCourses());
         System.out.println("================================================");
+    }
+
+    @Test
+    @Transactional
+    void setAddressDetails() {
+        Student student = em.find(Student.class, 20001L);
+        student.setAddress(new Address("No 101", "Street 1", "New York"));
+        em.flush();
+        log.info("Student {}", student);
     }
 }

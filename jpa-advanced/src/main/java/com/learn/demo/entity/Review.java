@@ -8,22 +8,21 @@ import lombok.*;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
-
+@ToString(exclude = {"course"})
 public class Review {
     @Id
     @GeneratedValue
     private Long id;
 
-    @Column(nullable = false)
-    private String rating;
+    @Enumerated(EnumType.STRING)
+    private ReviewRating rating;
 
     private String description;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Course course;
 
-    public Review(String rating, String description) {
+    public Review(ReviewRating rating, String description) {
         this.rating = rating;
         this.description = description;
     }
